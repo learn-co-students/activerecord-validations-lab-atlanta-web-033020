@@ -9,16 +9,13 @@ class Post < ActiveRecord::Base
 
   def is_clickbait?
     if self.title
-      got_one = false
       cb_titles = ["Won't Believe", "Secret", "Top", "Guess"]
       cb_titles.each do |cbt| 
         if title.include? cbt
-          got_one = true
+          return true
         end
       end
-      if !got_one
-        errors.add(:title, "must be clickbait")
-      end
+      errors.add(:title, "must be clickbait")
     end
   end
 end
